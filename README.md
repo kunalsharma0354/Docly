@@ -13,7 +13,7 @@ short summary in seconds, with a chat to ask anything about your documents.
 
 ---
 
-## ✨ Features
+## ~Features
 
 - **One-tap summaries** — pick any supported file, get a clean, short (<100 words) summary with the important facts: names, amounts, dates, deadlines, terms.
 - **Chat with your document** — ask questions directly; answers are grounded in the document text, with exact values quoted when present — never repeating the summary or an intro line.
@@ -24,7 +24,7 @@ short summary in seconds, with a chat to ask anything about your documents.
 - **Calm monochrome design** — dark, minimal Material 3 interface that stays out of your way.
 - **Tamper-proof build** — the APK contains an encrypted integrity blob; any byte change, re-sign or repack causes the app to refuse to start (see [Security](#-security)).
 
-## 📄 Supported formats
+## Supported formats
 
 | Category | Extensions |
 |---|---|
@@ -36,7 +36,7 @@ short summary in seconds, with a chat to ask anything about your documents.
 | E-books | `epub` `mobi` `azw` `azw3` |
 | Images (OCR) | `jpg` `jpeg` `png` `webp` `tiff` `tif` |
 
-## 🛠 Tech stack
+## Tech stack
 
 | Layer | Technology |
 |---|---|
@@ -49,7 +49,7 @@ short summary in seconds, with a chat to ask anything about your documents.
 | Office/E-books | Custom extractors (Apache POI-style via android-awt, ZIP/XML parsers) |
 | Build | Android Gradle Plugin 9.3 · Gradle 9.5 · version catalog |
 
-## 🚀 Getting started
+## Getting started
 
 ### Requirements
 
@@ -67,7 +67,7 @@ doclyApiKey=YOUR_MISTRAL_API_KEY_HERE
 Get a free key at [console.mistral.ai](https://console.mistral.ai) — the free tier
 (1 req/sec) is plenty for testing; the app throttles and retries automatically.
 
-> ⚠️ Never commit your real key. Keep `gradle/wrapper/gradle-wrapper.properties`
+> Never commit your real key. Keep `gradle/wrapper/gradle-wrapper.properties`
 > out of version control (or strip the `doclyApiKey` line before pushing).
 
 The key is **not** compiled into the APK as plaintext. At build time the `secgen`
@@ -95,7 +95,7 @@ Build output: `app/build/outputs/apk/debug/app-debug.apk`
 Edit `doclyApiKey=...` in `gradle/wrapper/gradle-wrapper.properties` and rebuild.
 The blob is regenerated on every build — no code changes needed.
 
-## 🔒 Security
+## Security
 
 Docly ships with an unusual amount of tamper resistance for an Android app:
 
@@ -123,7 +123,7 @@ and `secgen-plugin/` for the build-time injection.
 > rooted device. For production deployments, consider proxying requests through
 > your own backend instead of shipping a key at all.
 
-## 🧱 Project structure
+## Project structure
 
 ```
 docly/
@@ -141,7 +141,7 @@ docly/
 └── gradle/wrapper/gradle-wrapper.properties   # doclyApiKey lives here
 ```
 
-## 📊 Tests
+## Tests
 
 - **Unit tests** (`app/src/test`) — pure JVM logic.
 - **Instrumented tests** (`app/src/androidTest`) — Compose UI tests.
@@ -151,7 +151,7 @@ docly/
 ./gradlew :app:connectedDebugAndroidTest         # on-device tests
 ```
 
-## 👤 Developer
+## Developer
 
 **Kunal Sharma** — Android developer at NEXORA.
 
@@ -159,6 +159,6 @@ docly/
 - Discord: [Join the server](https://discord.gg/Bfay2C89f5)
 - Email: [Kunalsharma9321@gmail.com](mailto:Kunalsharma9321@gmail.com)
 
-## 📜 License
+## License
 
 © 2026 NEXORA · All rights reserved.
