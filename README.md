@@ -2,12 +2,11 @@
 
 # Docly
 
-**Sleek, AI-powered document assistant for Android**
+**AI-powered document assistant for Android**
 
-PDFs, Word, Excel, PowerPoint, e-books, CSVs and even images — turned into a clean,
-short summary in seconds, with a chat to ask anything about your documents.
+PDFs, Word, Excel, PowerPoint, e-books, CSVs, and images — turned into a clean, short summary in seconds, with a chat to ask anything about your documents.
 
-`Android 10+` · `100% on-device extraction` · `Mistral AI` · `Jetpack Compose`
+`Android 10+` | `100% on-device extraction` | `Mistral AI` | `Jetpack Compose`
 
 </div>
 
@@ -21,22 +20,24 @@ short summary in seconds, with a chat to ask anything about your documents.
 
 ---
 
-## ✨ Features
+## Features
 
-- **One-tap summaries** — pick any supported file, get a clean, short (<100 words) summary with the important facts: names, amounts, dates, deadlines, terms.
+- **One-tap summaries** — pick any supported file, get a concise summary (under 100 words) with key facts: names, amounts, dates, deadlines, terms.
 - **Chat with your document** — ask questions directly; answers are grounded in the document text, with exact values quoted when present — never repeating the summary or an intro line.
-- **Handles huge files** — long documents are chunked smartly, summarized part-by-part, then merged into one final summary.
-- **85+ output languages** — summaries and chat replies in English, Hindi, Bengali, Spanish, Japanese, Swahili and many more, in proper native script. Includes **Hinglish (Roman Hindi)** — natural Hindi written in English letters, the way it's actually typed in chat.
-- **OCR for images** — text inside photos, screenshots and scanned pages is read with ML Kit.
-- **Read aloud (TTS)** — every summary (labeled "Read aloud" button) and every AI reply (compact speaker icon) can be read out loud in the selected language. Only the actively speaking button lights up; a loading spinner appears while the engine warms up. Covers 85+ languages with region-variant fallbacks and graceful fallback to English when the device lacks a voice.
-- **Calm monochrome design** — dark, minimal Material 3 interface that stays out of your way.
-- **Tamper-proof build** — the APK contains an encrypted integrity blob; any byte change, re-sign or repack causes the app to refuse to start (see [Security](#-security)).
+- **Handles large files** — long documents are chunked smartly, summarized part-by-part, then merged into one final summary.
+- **85+ output languages** — summaries and chat replies in English, Hindi, Bengali, Spanish, Japanese, Swahili, and many more, in proper native script. Includes Hinglish (Roman Hindi) — natural Hindi written in English letters, as typed in chat.
+- **OCR for images** — text inside photos, screenshots, and scanned pages is read with Google ML Kit.
+- **Read aloud (TTS)** — every summary and AI reply can be read out loud in the selected language. Only the actively speaking button is highlighted; a loading spinner appears while the engine warms up. Covers 85+ languages with region-variant fallbacks and graceful fallback to English when the device lacks a voice.
+- **Minimal monochrome design** — dark, Material 3 interface that stays out of your way.
+- **Tamper-proof build** — the APK contains an encrypted integrity blob; any byte change, re-sign, or repack causes the app to refuse to start (see Security).
 
-## 📄 Supported formats
+---
+
+## Supported Formats
 
 | Category | Extensions |
-|---|---|
-| PDF | `pdf` (digital *and* scanned, via OCR) |
+|----------|------------|
+| PDF | `pdf` (digital and scanned, via OCR) |
 | Word | `docx` `doc` `rtf` `odt` |
 | Text | `txt` `md` |
 | Excel | `xlsx` `xls` `csv` `tsv` |
@@ -44,48 +45,48 @@ short summary in seconds, with a chat to ask anything about your documents.
 | E-books | `epub` `mobi` `azw` `azw3` |
 | Images (OCR) | `jpg` `jpeg` `png` `webp` `tiff` `tif` |
 
-## 🛠 Tech stack
+---
+
+## Tech Stack
 
 | Layer | Technology |
-|---|---|
+|-------|------------|
 | Language | Kotlin 2.2 |
-| UI | Jetpack Compose · Material 3 · Edge-to-Edge |
+| UI | Jetpack Compose, Material 3, Edge-to-Edge |
 | AI | Mistral AI (`open-mistral-nemo`) via REST |
 | PDF | PDFBox (Android port) |
 | OCR | Google ML Kit Text Recognition |
 | Read aloud | Android TextToSpeech (curated 85+ language locale map, chunking, per-button state, fallback) |
 | Office/E-books | Custom extractors (Apache POI-style via android-awt, ZIP/XML parsers) |
-| Build | Android Gradle Plugin 9.3 · Gradle 9.5 · version catalog |
+| Build | Android Gradle Plugin 9.3, Gradle 9.5, version catalog |
 
-## 🚀 Getting started
+---
+
+## Getting Started
 
 ### Requirements
 
 - Android Studio (latest stable) with JDK 17+
-- An Android device or emulator running **Android 10 (API 29)+**
+- Android device or emulator running Android 10 (API 29)+
 
-### 1. Set your Mistral API key
+### 1. Set Your Mistral API Key
 
-The build reads the real key from `gradle/wrapper/gradle-wrapper.properties`:
+The build reads the key from `gradle/wrapper/gradle-wrapper.properties`:
 
 ```properties
 doclyApiKey=YOUR_MISTRAL_API_KEY_HERE
 ```
 
-Get a free key at [console.mistral.ai](https://console.mistral.ai) — the free tier
-(1 req/sec) is plenty for testing; the app throttles and retries automatically.
+Get a free key at [console.mistral.ai](https://console.mistral.ai) — the free tier (1 req/sec) is sufficient for testing; the app throttles and retries automatically.
 
-> ⚠️ Never commit your real key. Keep `gradle/wrapper/gradle-wrapper.properties`
-> out of version control (or strip the `doclyApiKey` line before pushing).
+**Important:** Never commit your real key. Keep `gradle/wrapper/gradle-wrapper.properties` out of version control (or strip the `doclyApiKey` line before pushing).
 
-The key is **not** compiled into the APK as plaintext. At build time the `secgen`
-plugin encrypts it into a blob bound to your app's signing certificate (see
-[Security](#-security)).
+The key is not compiled into the APK as plaintext. At build time, the `secgen` plugin encrypts it into a blob bound to your app's signing certificate (see Security).
 
-### 2. Build & run
+### 2. Build & Run
 
 ```bash
-# Debug APK (includes the embedded security blob + resigning)
+# Debug APK (includes embedded security blob + resigning)
 ./gradlew.bat :app:assembleDebug        # Windows
 ./gradlew :app:assembleDebug            # macOS/Linux
 
@@ -98,40 +99,32 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 Build output: `app/build/outputs/apk/debug/app-debug.apk`
 
-### 3. Change your key
+### 3. Change Your Key
 
-Edit `doclyApiKey=...` in `gradle/wrapper/gradle-wrapper.properties` and rebuild.
-The blob is regenerated on every build — no code changes needed.
+Edit `doclyApiKey=...` in `gradle/wrapper/gradle-wrapper.properties` and rebuild. The blob is regenerated on every build — no code changes needed.
 
-## 🔒 Security
+---
 
-Docly ships with an unusual amount of tamper resistance for an Android app:
+## Security
 
-- **Per-build integrity blob** — a Gradle plugin (`secgen-plugin`, included build)
-  runs after packaging, fingerprints **every entry** of the final APK
-  (`name:SHA-256` hash per file), encrypts the fingerprint together with your API
-  key using **AES-256-GCM**, and injects the ciphertext into
-  `assets/security.bin`.
-- **Certificate-bound key** — the encryption key is derived from the app's
-  signing certificate, so the blob only decrypts under the original signature.
-- **Runtime gate** — at app startup, `Protect.init()` re-fingerprints the *installed*
-  APK and decrypts the blob. Any of the following makes the app immediately refuse
-  to run:
-  - a single byte changed anywhere in the APK (dex, resources, manifest, assets…),
-  - re-signing with a different certificate,
-  - stripped signatures,
-  - rooted devices or Frida/debugger attachment.
-- **Decoys** — the `BuildConfig` exposes only fake API keys, so naive static
-  analysis finds nothing real.
+Docly implements strong tamper resistance for an Android app:
 
-See `app/src/main/java/com/nexora/docly/security/Protect.kt` for the runtime gate
-and `secgen-plugin/` for the build-time injection.
+- **Per-build integrity blob** — a Gradle plugin (`secgen-plugin`, included in the build) runs after packaging, fingerprints every entry of the final APK (`name:SHA-256` hash per file), encrypts the fingerprint together with your API key using AES-256-GCM, and injects the ciphertext into `assets/security.bin`.
+- **Certificate-bound key** — the encryption key is derived from the app's signing certificate, so the blob only decrypts under the original signature.
+- **Runtime gate** — at app startup, `Protect.init()` re-fingerprints the installed APK and decrypts the blob. Any of the following causes the app to immediately refuse to run:
+  - a single byte changed anywhere in the APK (dex, resources, manifest, assets)
+  - re-signing with a different certificate
+  - stripped signatures
+  - rooted devices or Frida/debugger attachment
+- **Decoys** — `BuildConfig` exposes only fake API keys, so naive static analysis finds nothing real.
 
-> **Note:** no client-side secret is safe against a fully determined attacker on a
-> rooted device. For production deployments, consider proxying requests through
-> your own backend instead of shipping a key at all.
+See `app/src/main/java/com/nexora/docly/security/Protect.kt` for the runtime gate and `secgen-plugin/` for the build-time injection.
 
-## 🧱 Project structure
+> **Note:** no client-side secret is safe against a fully determined attacker on a rooted device. For production deployments, consider proxying requests through your own backend instead of shipping a key at all.
+
+---
+
+## Project Structure
 
 ```
 docly/
@@ -149,7 +142,9 @@ docly/
 └── gradle/wrapper/gradle-wrapper.properties   # doclyApiKey lives here
 ```
 
-## 📊 Tests
+---
+
+## Tests
 
 - **Unit tests** (`app/src/test`) — pure JVM logic.
 - **Instrumented tests** (`app/src/androidTest`) — Compose UI tests.
@@ -159,7 +154,9 @@ docly/
 ./gradlew :app:connectedDebugAndroidTest         # on-device tests
 ```
 
-## 👤 Developer
+---
+
+## Developer
 
 **Kunal Sharma** — Android developer at NEXORA.
 
@@ -167,6 +164,8 @@ docly/
 - Discord: [Join the server](https://discord.gg/Bfay2C89f5)
 - Email: [Kunalsharma9321@gmail.com](mailto:Kunalsharma9321@gmail.com)
 
-## 📜 License
+---
 
-© 2026 NEXORA · All rights reserved.
+## License
+
+© 2026 NEXORA. All rights reserved.
