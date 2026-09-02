@@ -16,6 +16,8 @@ PDFs, Word, Excel, PowerPoint, e-books, CSVs, and images — turned into a clean
 
 <div align="center">
 <img src="DoclyUi.jpeg" alt="Docly UI" width="600"/>
+
+<img src="InnerView.jpeg" alt="Docly inner view" width="600"/>
 </div>
 
 ---
